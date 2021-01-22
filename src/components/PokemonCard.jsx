@@ -17,7 +17,12 @@ export default function MediaCard() {
 
 
   const classes = useStyles();
-  const [pokemon, setPokemon] = useState('25')
+  const [pokemon, setPokemon] = useState('143')
+
+  function searchPokemon(pokemon, event) {
+    setPokemon(pokemon);
+
+  }
 
   function handleClick(id) {
     let poke = id + 1;
@@ -28,7 +33,7 @@ export default function MediaCard() {
   return (
     <Container align='center' >
     <Card className={classes.root} >
-      <Request pokemon={pokemon} handleClick={handleClick}/>
+      <Request pokemon={pokemon} searchPokemon={searchPokemon} handleClick={handleClick}/>
       
     </Card>
     </Container>
