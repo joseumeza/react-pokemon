@@ -25,8 +25,7 @@ export default function MediaCard() {
   }
 
   function handleClick(id) {
-    let poke = id + 1;
-    setPokemon(poke.toString())
+    setPokemon(id.toString())
 
   }
 

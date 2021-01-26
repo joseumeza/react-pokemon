@@ -10,10 +10,10 @@ import Button from '@material-ui/core/Button'
 import {makeStyles} from '@material-ui/core'
 import FlareOutlinedIcon from '@material-ui/icons/FlareOutlined';
 import LoopOutlinedIcon from '@material-ui/icons/LoopOutlined';
-import FormControl from '@material-ui/core/FormControl'
 import Input from '@material-ui/core/Input'
-import InputLabel from '@material-ui/core/InputLabel'
-import FormHelperText from '@material-ui/core/FormHelperText'
+import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
+import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
+import StarsOutlinedIcon from '@material-ui/icons/StarsOutlined';
 
 const useStyles = makeStyles({
     root: {
@@ -162,7 +162,7 @@ export default function Request(props) {
                     isShiny: false
                 }
             });
-            props.handleClick(pokemon.id)}}>
+            props.handleClick(pokemon.id + 1)}}>
         <CardMedia
           className={classes.media}
           image={imgInfo.imgUrl}
@@ -170,29 +170,57 @@ export default function Request(props) {
 
         />
         <CardContent>
+            
           <Typography gutterBottom variant="h3" component="h2" >
-            {pokemon.name}
+            {pokemon.name.toUpperCase()}
           </Typography>
           <Typography variant="h6" color="textSecondary" component="p">
-              ID: {pokemon.id} | WT: {pokemon.weight}
+              ID: {pokemon.id} | WT: {pokemon.weight} | HG: {pokemon.height}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions> 
+      
         <Button onClick={handleClick} name='shiny' size="small" color="primary">
             <FlareOutlinedIcon color={imgInfo.isShiny ? "primary" : "secondary"}/>
         </Button>
         <Button onClick={handleClick} name="face" size="small" color="primary">
             <LoopOutlinedIcon />
         </Button>
-
-        <Input onChange={(e) => setSearch(e.currentTarget.value)} id="pokemonSearch" size="small" aria-describedby="search Pokemon" value={search} placeholder="Find Pokemon" />
         <Button onClick={() => {
-            props.searchPokemon(search)
-            setSearch('')
-            }}>Go</Button>
+            setImgInfo((prev) => {
+                return {
+                    ...prev,
+                    isFront: true,
+                    isShiny: false
+                }
+            });
+            props.handleClick(pokemon.id - 1)}}><ArrowBackIosOutlinedIcon/></Button>
 
+            <Button onClick={() => {
+            setImgInfo((prev) => {
+                return {
+                    ...prev,
+                    isFront: true,
+                    isShiny: false
+                }
+            });
+            props.handleClick(pokemon.id + 1)}}><ArrowForwardIosOutlinedIcon/> </Button>
       </CardActions>
+      <CardActions >
+          <StarsOutlinedIcon/>
+        <Input onChange={(e) => {setSearch(e.currentTarget.value)}} id="pokemonSearch"  aria-describedby="search Pokemon" value={search} placeholder="Search Pokemon" />
+
+        <Button onClick={() => {
+            if(!search) {
+                props.searchPokemon(Math.floor(Math.random() * 898).toString())
+            } else {
+                props.searchPokemon(search)
+            }
+            setSearch('')
+        }}>Go</Button>
+
+    </CardActions>
       </div>
     )
 }
