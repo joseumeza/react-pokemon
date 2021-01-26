@@ -2,9 +2,9 @@ import React from 'react';
 import Navigation from './common/Navigation';
 import PokemonCard from './PokemonCard'
 import Typography from '@material-ui/core/Typography'
-import Crying from './crying'
 
 function App() {
+
     return (
         <div>
             <Navigation />
@@ -12,7 +12,6 @@ function App() {
                 Pokedex
             </Typography>
             <PokemonCard />
-            <Crying />
         </div>
     )
 };
