@@ -4,10 +4,11 @@ import PokemonCard from './PokemonCard'
 import Typography from '@material-ui/core/Typography'
 
 function App() {
+
     return (
         <div>
             <Navigation />
-            <Typography align='center' variant='h1'>
+            <Typography align='center' variant='h1'  >
                 Pokedex
             </Typography>
             <PokemonCard />
